@@ -67,6 +67,7 @@ class ProductTypes extends Base
             'descriptionFormat' => $productType->descriptionFormat,
             'lineItemFormat' => $productType->lineItemFormat,
             'template' => $productType->template,
+            'locales' => $this->getLocaleDefinitions($productType->getLocales()),
             'fieldLayout' => Craft::app()->schematic_fields->getFieldLayoutDefinition($fieldLayout),
             'variantFieldLayout' => Craft::app()->schematic_fields->getFieldLayoutDefinition($variantFieldLayout),
         ];
