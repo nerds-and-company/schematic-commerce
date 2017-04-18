@@ -1,4 +1,4 @@
-# Schematic for Commerce [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nerds-and-company/schematic-commerce/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nerds-and-company/schematic-commerce/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/nerds-and-company/schematic-commerce/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/nerds-and-company/schematic-commerce/?branch=master)
+# Schematic for Commerce [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nerds-and-company/schematic-commerce/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nerds-and-company/schematic-commerce/?branch=master) [![Build Status](https://travis-ci.org/nerds-and-company/schematic-commerce.svg?branch=master)](https://travis-ci.org/nerds-and-company/schematic-commerce) [![Code Coverage](https://scrutinizer-ci.com/g/nerds-and-company/schematic-commerce/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/nerds-and-company/schematic-commerce/?branch=master)
 
 Schematic for Commerce is a package for synchronizing Commerce settings with [Schematic](https://github.com/nerds-and-company/schematic).
 
