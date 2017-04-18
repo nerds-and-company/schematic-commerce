@@ -29,7 +29,9 @@ class ProductTypes extends Base
      */
     public function export(array $productTypes = [])
     {
-        $productTypes = Craft::app()->commerce_productTypes->getAllProductTypes();
+        if (!count($productTypes)) {
+            $productTypes = Craft::app()->commerce_productTypes->getAllProductTypes();
+        }
 
         Craft::log(Craft::t('Exporting Commerce Product Types'));
 
