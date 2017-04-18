@@ -3,6 +3,9 @@
 namespace NerdsAndCompany\Schematic\Commerce\Services;
 
 use Craft\Craft;
+use Craft\Commerce_ProductTypeModel;
+use Craft\Commerce_ProductTypeLocaleModel;
+use NerdsAndCompany\Schematic\Services\Base;
 
 /**
  * Schematic Commerce Product Types Service.
@@ -26,6 +29,8 @@ class ProductTypes extends Base
      */
     public function export(array $productTypes = [])
     {
+        $productTypes = Craft::app()->commerce_productTypes->getAllProductTypes();
+
         Craft::log(Craft::t('Exporting Commerce Product Types'));
 
         $productTypeDefinitions = [];
