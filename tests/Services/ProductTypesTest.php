@@ -21,7 +21,7 @@ use PHPUnit_Framework_MockObject_MockObject as Mock;
  *
  * @see      http://www.nerds.company
  *
- * @coversDefaultClass \NerdsAndCompany\Schematic\Services\Commerce\ProductTypes
+ * @coversDefaultClass \NerdsAndCompany\Schematic\Commerce\Services\ProductTypes
  * @covers ::__construct
  * @covers ::<!public>
  */
