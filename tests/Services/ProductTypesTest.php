@@ -245,6 +245,7 @@ class ProductTypesTest extends BaseTest
             ->willReturnMap([
                 ['id', $typeId],
                 ['fieldLayoutId', $typeId],
+                ['variantFieldLayoutId', $typeId],
                 ['handle', 'typeHandle'.$typeId],
                 ['name', 'typeName'.$typeId],
             ]);
