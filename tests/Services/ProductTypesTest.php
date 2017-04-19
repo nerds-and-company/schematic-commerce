@@ -38,7 +38,7 @@ class ProductTypesTest extends BaseTest
      * @covers ::export
      * @dataProvider provideValidProductTypes
      *
-     * @param ProductTypeModel[] $groups
+     * @param ProductTypeModel[] $types
      * @param array              $expectedResult
      */
     public function testSuccessfulExport(array $types, array $expectedResult = [])
@@ -73,25 +73,25 @@ class ProductTypesTest extends BaseTest
         $this->assertFalse($import->hasErrors());
     }
 
-      /**
-       * @covers ::import
-       * @dataProvider provideValidProductTypeDefinitions
-       *
-       * @param array $typeDefinitions
-       */
-      public function testImportWithForceOption(array $typeDefinitions)
-      {
-          $this->setMockProductTypesService();
-          $this->setMockDbConnection();
-          $this->setMockSchematicFields();
+    /**
+     * @covers ::import
+     * @dataProvider provideValidProductTypeDefinitions
+     *
+     * @param array $typeDefinitions
+     */
+    public function testImportWithForceOption(array $typeDefinitions)
+    {
+        $this->setMockProductTypesService();
+        $this->setMockDbConnection();
+        $this->setMockSchematicFields();
 
-          $schematicProductTypesService = new ProductTypes();
+        $schematicProductTypesService = new ProductTypes();
 
-          $import = $schematicProductTypesService->import($typeDefinitions, true);
+        $import = $schematicProductTypesService->import($typeDefinitions, true);
 
-          $this->assertInstanceOf(Result::class, $import);
-          $this->assertFalse($import->hasErrors());
-      }
+        $this->assertInstanceOf(Result::class, $import);
+        $this->assertFalse($import->hasErrors());
+    }
 
     //==============================================================================================================
     //==============================================  PROVIDERS  ===================================================
@@ -103,7 +103,7 @@ class ProductTypesTest extends BaseTest
     public function provideValidProductTypes()
     {
         return [
-            'single group' => [
+            'single type' => [
                 'ProductTypes' => [
                     'type1' => $this->getMockProductType(1),
                 ],
@@ -133,7 +133,7 @@ class ProductTypesTest extends BaseTest
                     ],
                 ],
             ],
-            'multiple groups' => [
+            'multiple types' => [
                 'ProductTypes' => [
                     'type1' => $this->getMockProductType(1),
                     'type2' => $this->getMockProductType(2),
@@ -199,7 +199,7 @@ class ProductTypesTest extends BaseTest
             'emptyArray' => [
                 'typeDefinitions' => [],
             ],
-            'single group' => [
+            'single type' => [
                 'typeDefinitions' => [
                     'typeHandle1' => [
                         'name' => 'typeName1',
