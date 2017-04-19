@@ -111,6 +111,7 @@ class ProductTypesTest extends BaseTest
                     'typeHandle1' => [
                         'name' => 'typeName1',
                         'hasUrls' => null,
+                        'hasDimensions' => null,
                         'hasVariants' => null,
                         'hasVariantTitleField' => null,
                         'titleFormat' => null,
@@ -141,6 +142,7 @@ class ProductTypesTest extends BaseTest
                     'typeHandle1' => [
                         'name' => 'typeName1',
                         'hasUrls' => null,
+                        'hasDimensions' => null,
                         'hasVariants' => null,
                         'hasVariantTitleField' => null,
                         'titleFormat' => null,
@@ -163,6 +165,7 @@ class ProductTypesTest extends BaseTest
                     'typeHandle2' => [
                         'name' => 'typeName2',
                         'hasUrls' => null,
+                        'hasDimensions' => null,
                         'hasVariants' => null,
                         'hasVariantTitleField' => null,
                         'titleFormat' => null,
@@ -201,6 +204,7 @@ class ProductTypesTest extends BaseTest
                     'typeHandle1' => [
                         'name' => 'typeName1',
                         'hasUrls' => null,
+                        'hasDimensions' => null,
                         'hasVariants' => null,
                         'hasVariantTitleField' => null,
                         'titleFormat' => null,
