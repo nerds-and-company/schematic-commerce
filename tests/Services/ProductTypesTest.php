@@ -79,7 +79,7 @@ class ProductTypesTest extends BaseTest
        */
       public function testImportWithForceOption(array $typeDefinitions)
       {
-          $this->setMockCategoriesService();
+          $this->setMockProductTypesService();
           $this->setMockDbConnection();
           $this->setMockSchematicFields();
 
