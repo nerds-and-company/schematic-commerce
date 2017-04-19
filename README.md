@@ -14,7 +14,22 @@ This will add `nerds-and-company/schematic-commerce` as a requirement to your  p
 
 ## Usage
 
-Talk about usage
+This package should be loaded with a Craft plugin, which implements the `registerMigrationService()` hook of Schematic:
+
+```php
+public function registerMigrationService()
+{
+    return [
+        'commerce_productTypes' => new \NerdsAndCompany\Schematic\Commerce\Services\ProductTypes(),
+    ];
+}
+```
+
+Here is a list of all of the supported Commerce data types:
+
+| Data Type |
+| ------------- |
+| Product Types |
 
 ## License
 
