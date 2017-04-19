@@ -26,6 +26,10 @@ install:
   - unzip craft.zip
   - rm craft.zip
   - echo "<?php return ['user' => 'test'];" > craft/config/db.php
+  - curl -sS https://craftcommerce.com/index.php/actions/commerceDownload/go > commerce.zip
+  - unzip commerce.zip
+  - rm commerce.zip
+  - mv commerce craft/plugins
   - composer install
   - cd craft/app
   - composer require mockery/mockery
