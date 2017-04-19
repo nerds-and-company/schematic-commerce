@@ -101,10 +101,6 @@ class ProductTypesTest extends BaseTest
     public function provideValidProductTypes()
     {
         return [
-            'emptyArray' => [
-                'ProductTypes' => [],
-                'expectedResult' => [],
-            ],
             'single group' => [
                 'ProductTypes' => [
                     'type1' => $this->getMockProductType(1),
@@ -247,8 +243,8 @@ class ProductTypesTest extends BaseTest
             ->willReturnMap([
                 ['id', $groupId],
                 ['fieldLayoutId', $groupId],
-                ['handle', 'groupHandle'.$groupId],
-                ['name', 'groupName'.$groupId],
+                ['handle', 'typeHandle'.$groupId],
+                ['name', 'typeName'.$groupId],
             ]);
 
         $mockProductType->expects($this->any())
