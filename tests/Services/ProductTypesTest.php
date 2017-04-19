@@ -10,6 +10,7 @@ use Craft\DbConnection;
 use Craft\FieldLayoutModel;
 use Craft\FieldsService;
 use NerdsAndCompany\Schematic\Models\Result;
+use NerdsAndCompany\Schematic\Services\Fields;
 use PHPUnit_Framework_MockObject_MockObject as Mock;
 
 /**
