@@ -3,6 +3,8 @@
 namespace NerdsAndCompany\Schematic\Commerce\Services;
 
 use Craft\BaseTest;
+use Craft\Commerce_ProductTypeModel;
+use Craft\Commerce_ProductTypeLocaleModel;
 use Craft\Commerce_ProductTypesService;
 use Craft\Craft;
 use Craft\DbCommand;
@@ -228,23 +230,23 @@ class ProductTypesTest extends BaseTest
     //==============================================================================================================
 
     /**
-     * @param string $groupId
+     * @param string $typeId
      *
      * @return Mock|ProductTypeModel
      */
-    private function getMockProductType($groupId)
+    private function getMockProductType($typeId)
     {
-        $mockProductType = $this->getMockBuilder(ProductTypeModel::class)
+        $mockProductType = $this->getMockBuilder(Commerce_ProductTypeModel::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $mockProductType->expects($this->any())
             ->method('__get')
             ->willReturnMap([
-                ['id', $groupId],
-                ['fieldLayoutId', $groupId],
-                ['handle', 'typeHandle'.$groupId],
-                ['name', 'typeName'.$groupId],
+                ['id', $typeId],
+                ['fieldLayoutId', $typeId],
+                ['handle', 'typeHandle'.$typeId],
+                ['name', 'typeName'.$typeId],
             ]);
 
         $mockProductType->expects($this->any())
@@ -340,7 +342,7 @@ class ProductTypesTest extends BaseTest
      */
     private function getMockProductTypeLocale()
     {
-        $mockProductTypeLocale = $this->getMockBuilder(ProductTypeLocaleModel::class)
+        $mockProductTypeLocale = $this->getMockBuilder(Commerce_ProductTypeLocaleModel::class)
             ->disableOriginalConstructor()
             ->getMock();
 
