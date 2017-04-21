@@ -54,7 +54,7 @@ class PaymentCurrencies extends Base
     {
         return [
             'iso' => $paymentCurrency->iso,
-            'primary' => $paymentCurrency->primay,
+            'primary' => $paymentCurrency->primary,
             'rate' => $paymentCurrency->rate,
         ];
     }
