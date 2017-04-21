@@ -72,7 +72,10 @@ class PaymentCurrencies extends Base
         Craft::log(Craft::t('Importing Commerce Payment Currencies'));
 
         $this->resetCraftPaymentCurrenciesServiceCache();
-        $paymentCurrencies = Craft::app()->commerce_paymentCurrencies->getAllPaymentCurrencies();
+        $paymentCurrencies = array();
+        foreach (Craft::app()->commerce_paymentCurrencies->getAllPaymentCurrencies() as $paymentCurrency) {
+            $paymentCurrencies[$paymentCurrency->iso] = $paymentCurrency;
+        }
 
         foreach ($paymentCurrencyDefinitions as $paymentCurrencyDefinition) {
             $paymentCurrencyHandle = $paymentCurrencyDefinition['iso'];
@@ -112,7 +115,7 @@ class PaymentCurrencies extends Base
         $paymentCurrency->setAttributes([
             'iso' => $paymentCurrencyHandle,
             'primary' => $paymentCurrencyDefinition['primary'],
-            'rate' => $paymentCurrencyDefintion['rate'],
+            'rate' => $paymentCurrencyDefinition['rate'],
         ]);
     }
 
@@ -126,7 +129,7 @@ class PaymentCurrencies extends Base
         if ($refObject->hasProperty('_allCurrencies')) {
             $refProperty = $refObject->getProperty('_allCurrencies');
             $refProperty->setAccessible(true);
-            $refProperty->setValue($obj, false);
+            $refProperty->setValue($obj, null);
         }
     }
 }
