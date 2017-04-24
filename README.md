@@ -17,10 +17,25 @@ This will add `nerds-and-company/schematic-commerce` as a requirement to your  p
 This package should be loaded with a Craft plugin, which implements the `registerMigrationService()` hook of Schematic:
 
 ```php
+use NerdsAndCompany\Schematic\Commerce\Services as Commerce;
+
 public function registerMigrationService()
 {
     return [
-        'commerce_productTypes' => new \NerdsAndCompany\Schematic\Commerce\Services\ProductTypes(),
+        'commerce_orderSettings' => new Commerce\OrderSettings(),
+        'commerce_orderStatuses' => new Commerce\OrderStatuses(),
+        'commerce_emails' => new Commerce\Emails(),
+        'commerce_paymentMethods' => new Commerce\PaymentMethods(),
+        'commerce_paymentCurrencies' => new Commerce\PaymentCurrencies(),
+        'commerce_productTypes' => new Commerce\ProductTypes(),
+        'commerce_countries' => new Commerce\Countries(),
+        'commerce_states' => new Commerce\States(),
+        'commerce_taxCategories' => new Commerce\TaxCategories(),
+        'commerce_taxZones' => new Commerce\TaxZones(),
+        'commerce_taxRates' => new Commerce\TaxRates(),
+        'commerce_shippingCategories' => new Commerce\ShippingCategories(),
+        'commerce_shippingZones' => new Commerce\ShippingZones(),
+        'commerce_shippingMethods' => new Commerce\ShippingMethods(),
     ];
 }
 ```
@@ -29,7 +44,19 @@ Here is a list of all of the supported Commerce data types:
 
 | Data Type |
 | ------------- |
+| Order Settings |
+| Order Statuses |
+| Emails |
+| Payment Methods |
+| Payment Currencies |
 | Product Types |
+| Countries |
+| States |
+| Tax Categories |
+| Tax Rates |
+| Shipping Categories |
+| Shipping Zones |
+| Shipping Methods |
 
 ## License
 
