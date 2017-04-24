@@ -178,6 +178,8 @@ class ShippingMethods extends Base
 
                 continue;
             }
+
+            $this->populateShippingMethodRules($shippingMethod, $shippingMethodDefinition['rules']);
         }
 
         if ($force) {
@@ -203,8 +205,6 @@ class ShippingMethods extends Base
             'name' => $shippingMethodDefinition['name'],
             'enabled' => $shippingMethodDefinition['enabled'],
         ]);
-
-        $this->populateShippingMethodRules($shippingMethod, $shippingMethodDefinition['rules']);
     }
 
     /**
