@@ -248,7 +248,11 @@ class ShippingMethods extends Base
 
             $this->populateShippingMethodRuleCategories($rule, $ruleDef['categories']);
 
-            Craft::app()->commerce_shippingRules->saveShippingRule($rule);
+            if (!Craft::app()->commerce_shippingRules->saveShippingRule($rule)) { // Save shippingrule via craft
+                $this->addErrors($rule->getAllErrors());
+
+                continue;
+            }
         }
     }
 
@@ -262,13 +266,13 @@ class ShippingMethods extends Base
     {
         $categories = array();
         foreach ($rule->getShippingRuleCategories() as $category) {
-            $categories[$category->getCategory()->handle] = $rule;
+            $categories[$category->getCategory()->handle] = $category;
         }
 
         foreach ($categoryDefinitions as $categoryHandle => $categoryDef) {
             $category = array_key_exists($categoryHandle, $categories) ? $categories[$categoryHandle] : new Commerce_ShippingRuleCategoryModel();
 
-            $rule->setAttributes([
+            $category->setAttributes([
                 'shippingCategoryId' => Craft::app()->commerce_shippingCategories->getShippingCategoryByHandle($categoryHandle)->id,
                 'condition' => $categoryDef['condition'],
                 'perItemRate' => $categoryDef['perItemRate'],
