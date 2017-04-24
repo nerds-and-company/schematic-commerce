@@ -280,7 +280,7 @@ class ShippingMethods extends Base
                 'percentageRate' => $categoryDef['percentageRate'],
             ]);
 
-            $categories[$categoryHandle] = $category;
+            $categories[$category->shippingCategoryId] = $category;
         }
 
         $rule->setShippingRuleCategories($categories);
