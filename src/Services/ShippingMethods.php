@@ -159,6 +159,7 @@ class ShippingMethods extends Base
         Craft::log(Craft::t('Importing Commerce Shipping Methods'));
 
         $this->resetCraftShippingMethodsServiceCache();
+        $this->resetCraftShippingCategoriesServiceCache();
         $shippingMethods = array();
         foreach (Craft::app()->commerce_shippingMethods->getAllShippingMethods() as $shippingMethod) {
             $shippingMethods[$shippingMethod->handle] = $shippingMethod;
@@ -297,6 +298,30 @@ class ShippingMethods extends Base
             $refProperty = $refObject->getProperty('_shippingMethods');
             $refProperty->setAccessible(true);
             $refProperty->setValue($obj, null);
+        }
+    }
+
+    /**
+     * Reset service cache using reflection.
+     */
+    private function resetCraftShippingCategoriesServiceCache()
+    {
+        $obj = Craft::app()->commerce_shippingCategories;
+        $refObject = new \ReflectionObject($obj);
+        if ($refObject->hasProperty('_fetchedAllShippingCategories')) {
+            $refProperty = $refObject->getProperty('_fetchedAllShippingCategories');
+            $refProperty->setAccessible(true);
+            $refProperty->setValue($obj, false);
+        }
+        if ($refObject->hasProperty('_shippingCategoriesById')) {
+            $refProperty = $refObject->getProperty('_shippingCategoriesById');
+            $refProperty->setAccessible(true);
+            $refProperty->setValue($obj, array());
+        }
+        if ($refObject->hasProperty('_shippingCategoriesByHandle')) {
+            $refProperty = $refObject->getProperty('_shippingCategoriesByHandle');
+            $refProperty->setAccessible(true);
+            $refProperty->setValue($obj, array());
         }
     }
 }
