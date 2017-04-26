@@ -185,7 +185,7 @@ class ShippingMethods extends Base
 
         if ($force) {
             foreach ($shippingMethods as $shippingMethod) {
-                Craft::app()->commerce_shippingMethods->deleteShippingMethodById($shippingMethod->id);
+                Craft::app()->commerce_shippingMethods->delete($shippingMethod);
             }
         }
 
