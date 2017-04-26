@@ -3,7 +3,7 @@
 namespace NerdsAndCompany\Schematic\Commerce\Services;
 
 use Craft\BaseTest;
-use Craft\Commerce_OrderSettingModel;
+use Craft\Commerce_OrderSettingsModel;
 use Craft\Commerce_OrderSettingsService;
 use Craft\Craft;
 use Craft\DbCommand;
@@ -149,7 +149,7 @@ class OrderSettingsTest extends BaseTest
      */
     private function getMockOrderSetting()
     {
-        $mockOrderSetting = $this->getMockBuilder(Commerce_OrderSettingModel::class)
+        $mockOrderSetting = $this->getMockBuilder(Commerce_OrderSettingsModel::class)
             ->disableOriginalConstructor()
             ->getMock();
 
