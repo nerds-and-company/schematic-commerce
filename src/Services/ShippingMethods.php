@@ -180,7 +180,7 @@ class ShippingMethods extends Base
                 continue;
             }
 
-            $this->populateShippingMethodRules($shippingMethod, $shippingMethodDefinition['rules']);
+            $this->populateShippingMethodRules($shippingMethod, $shippingMethodDefinition['rules'], $force);
         }
 
         if ($force) {
@@ -212,9 +212,10 @@ class ShippingMethods extends Base
      * Populate shipping method rules.
      *
      * @param Commerce_ShippingMethodModel $shippingMethod
-     * @param $ruleDefinitions
+     * @param array                        $ruleDefinitions
+     * @param bool                         $force
      */
-    private function populateShippingMethodRules(Commerce_ShippingMethodModel $shippingMethod, $ruleDefinitions)
+    private function populateShippingMethodRules(Commerce_ShippingMethodModel $shippingMethod, $ruleDefinitions, $force = false)
     {
         $rules = array();
         foreach ($shippingMethod->getRules() as $rule) {
@@ -223,6 +224,8 @@ class ShippingMethods extends Base
 
         foreach ($ruleDefinitions as $ruleName => $ruleDef) {
             $rule = array_key_exists($ruleName, $rules) ? $rules[$ruleName] : new Commerce_ShippingRuleModel();
+
+            unset($rules[$ruleName]);
 
             $shippingZone = Commerce_ShippingZoneRecord::model()->findByAttributes(array('name' => $ruleDef['shippingZone']));
 
@@ -253,6 +256,12 @@ class ShippingMethods extends Base
                 $this->addErrors($rule->getAllErrors());
 
                 continue;
+            }
+        }
+
+        if ($force) {
+            foreach ($rules as $rule) {
+                Craft::app()->commerce_shippingRules->deleteShippingRuleById($rule->id);
             }
         }
     }
