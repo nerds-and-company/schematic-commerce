@@ -52,24 +52,50 @@ class TaxZones extends Base
      */
     private function getTaxZoneDefinition(Commerce_TaxZoneModel $taxZone)
     {
-        $countries = array();
-        foreach ($taxZone->getCountries() as $country) {
-            $countries[] = $country->iso;
-        }
-
-        $states = array();
-        foreach ($taxZone->getStates() as $state) {
-            $states[] = $state->abbreviation;
-        }
-
         return [
             'name' => $taxZone->name,
             'description' => $taxZone->description,
             'countryBased' => $taxZone->countryBased,
             'default' => $taxZone->default,
-            'countries' => $countries,
-            'states' => $states,
+            'countries' => $this->getCountryDefinitions($taxZone->getCountries()),
+            'states' => $this->getStateDefinitions($taxZone->getStates()),
         ];
+    }
+
+    /**
+     * Get country definitions.
+     *
+     * @param Commerce_CountryModel[] $countries
+     *
+     * @return array
+     */
+    private function getCountryDefinitions(array $countries)
+    {
+        $countryDefinitions = [];
+
+        foreach ($countries as $country) {
+            $countryDefinitions[] = $country->iso;
+        }
+
+        return $countryDefinitions;
+    }
+
+    /**
+     * Get state definitions.
+     *
+     * @param Commerce_StateModel[] $states
+     *
+     * @return array
+     */
+    private function getStateDefinitions(array $states)
+    {
+        $stateDefinitions = [];
+
+        foreach ($states as $state) {
+            $stateDefinitions[] = $state->abbreviation;
+        }
+
+        return $stateDefinitions;
     }
 
     /**
@@ -99,15 +125,8 @@ class TaxZones extends Base
 
             $this->populateTaxZone($taxZone, $taxZoneDefinition, $taxZoneHandle);
 
-            $countryIds = array();
-            foreach ($taxZone->getCountries() as $country) {
-                $countryIds[] = $country->id;
-            }
-
-            $stateIds = array();
-            foreach ($taxZone->getStates() as $state) {
-                $stateIds[] = $state->id;
-            }
+            $countryIds = $this->getCountryIds($taxZone);
+            $stateIds = $this->getStateIds($taxZone);
 
             if (!Craft::app()->commerce_taxZones->saveTaxZone($taxZone, $countryIds, $stateIds)) { // Save taxzone via craft
                 $this->addErrors($taxZone->getAllErrors());
@@ -152,5 +171,39 @@ class TaxZones extends Base
             $states[] = Craft::app()->commerce_states->getStateByAttributes(array('abbreviation' => $abbreviation));
         }
         $taxZone->setStates($states);
+    }
+
+    /**
+     * Get country ids.
+     *
+     * @param Commerce_TaxZoneModel $taxZone
+     *
+     * @return array
+     */
+    private function getCountryIds(Commerce_TaxZoneModel $taxZone)
+    {
+        $countryIds = array();
+        foreach ($taxZone->getCountries() as $country) {
+            $countryIds[] = $country->id;
+        }
+
+        return $countryIds;
+    }
+
+    /**
+     * Get state ids.
+     *
+     * @param Commerce_TaxZoneModel $taxZone
+     *
+     * @return array
+     */
+    private function getStateIds(Commerce_TaxZoneModel $taxZone)
+    {
+        $stateIds = array();
+        foreach ($taxZone->getStates() as $state) {
+            $stateIds[] = $state->id;
+        }
+
+        return $stateIds;
     }
 }
