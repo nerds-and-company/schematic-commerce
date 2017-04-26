@@ -158,6 +158,7 @@ class ProductTypes extends Base
             'handle' => $productTypeHandle,
             'name' => $productTypeDefinition['name'],
             'hasUrls' => $productTypeDefinition['hasUrls'],
+            'hasDimensions' => $productTypeDefinition['hasDimensions'],
             'hasVariants' => $productTypeDefinition['hasVariants'],
             'hasVariantTitleField' => $productTypeDefinition['hasVariantTitleField'],
             'titleFormat' => $productTypeDefinition['titleFormat'],
