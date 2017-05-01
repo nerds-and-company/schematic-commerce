@@ -155,7 +155,7 @@ class TaxCategoriesTest extends BaseTest
     /**
      * @param string $categoryId
      *
-     * @return Mock|TaxCategoryModel
+     * @return Mock|Commerce_TaxCategoryModel
      */
     private function getMockTaxCategory($categoryId)
     {
@@ -181,7 +181,7 @@ class TaxCategoriesTest extends BaseTest
     }
 
     /**
-     * @return Mock|CategoriesService
+     * @return Mock|Commerce_TaxCategoriesService
      */
     private function setMockTaxCategoriesService()
     {

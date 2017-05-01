@@ -3,7 +3,10 @@
 namespace NerdsAndCompany\Schematic\Commerce\Services;
 
 use Craft\BaseTest;
+use Craft\Commerce_ShippingCategoryModel;
 use Craft\Commerce_ShippingMethodModel;
+use Craft\Commerce_ShippingRuleModel;
+use Craft\Commerce_ShippingRuleCategoryModel;
 use Craft\Commerce_ShippingMethodsService;
 use Craft\Craft;
 use Craft\DbCommand;
@@ -102,7 +105,35 @@ class ShippingMethodsTest extends BaseTest
                     'methodHandle1' => [
                         'name' => 'methodName1',
                         'enabled' => null,
-                        'rules' => [],
+                        'rules' => [
+                            'ruleName1' => [
+                                'name' => 'ruleName1',
+                                'description' => null,
+                                'shippingZone' => null,
+                                'priority' => null,
+                                'enabled' => null,
+                                'minQty' => null,
+                                'maxQty' => null,
+                                'minTotal' => null,
+                                'maxTotal' => null,
+                                'minWeight' => null,
+                                'maxWeight' => null,
+                                'baseRate' => null,
+                                'perItemRate' => null,
+                                'weightRate' => null,
+                                'percentageRate' => null,
+                                'minRate' => null,
+                                'maxRate' => null,
+                                'categories' => [
+                                    'categoryHandle1' => [
+                                        'condition' => null,
+                                        'perItemRate' => null,
+                                        'weightRate' => null,
+                                        'percentageRate' => null,
+                                    ],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ],
@@ -115,12 +146,68 @@ class ShippingMethodsTest extends BaseTest
                     'methodHandle1' => [
                         'name' => 'methodName1',
                         'enabled' => null,
-                        'rules' => [],
+                        'rules' => [
+                            'ruleName1' => [
+                                'name' => 'ruleName1',
+                                'description' => null,
+                                'shippingZone' => null,
+                                'priority' => null,
+                                'enabled' => null,
+                                'minQty' => null,
+                                'maxQty' => null,
+                                'minTotal' => null,
+                                'maxTotal' => null,
+                                'minWeight' => null,
+                                'maxWeight' => null,
+                                'baseRate' => null,
+                                'perItemRate' => null,
+                                'weightRate' => null,
+                                'percentageRate' => null,
+                                'minRate' => null,
+                                'maxRate' => null,
+                                'categories' => [
+                                    'categoryHandle1' => [
+                                        'condition' => null,
+                                        'perItemRate' => null,
+                                        'weightRate' => null,
+                                        'percentageRate' => null,
+                                    ],
+                                ],
+                            ],
+                        ],
                     ],
                     'methodHandle2' => [
                         'name' => 'methodName2',
                         'enabled' => null,
-                        'rules' => [],
+                        'rules' => [
+                            'ruleName2' => [
+                                'name' => 'ruleName2',
+                                'description' => null,
+                                'shippingZone' => null,
+                                'priority' => null,
+                                'enabled' => null,
+                                'minQty' => null,
+                                'maxQty' => null,
+                                'minTotal' => null,
+                                'maxTotal' => null,
+                                'minWeight' => null,
+                                'maxWeight' => null,
+                                'baseRate' => null,
+                                'perItemRate' => null,
+                                'weightRate' => null,
+                                'percentageRate' => null,
+                                'minRate' => null,
+                                'maxRate' => null,
+                                'categories' => [
+                                    'categoryHandle2' => [
+                                        'condition' => null,
+                                        'perItemRate' => null,
+                                        'weightRate' => null,
+                                        'percentageRate' => null,
+                                    ],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ],
@@ -155,7 +242,7 @@ class ShippingMethodsTest extends BaseTest
     /**
      * @param string $methodId
      *
-     * @return Mock|ShippingMethodModel
+     * @return Mock|Commerce_ShippingMethodModel
      */
     private function getMockShippingMethod($methodId)
     {
@@ -173,7 +260,7 @@ class ShippingMethodsTest extends BaseTest
 
         $mockShippingMethod->expects($this->any())
             ->method('getRules')
-            ->willReturn([]);
+            ->willReturn([$this->getMockShippingRule($methodId)]);
 
         $mockShippingMethod->expects($this->any())
             ->method('getAllErrors')
@@ -185,7 +272,77 @@ class ShippingMethodsTest extends BaseTest
     }
 
     /**
-     * @return Mock|CategoriesService
+     * @param string $ruleId
+     *
+     * @return Mock|Commerce_ShippingRuleModel
+     */
+    private function getMockShippingRule($ruleId)
+    {
+        $mockShippingRule = $this->getMockBuilder(Commerce_ShippingRuleModel::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $mockShippingRule->expects($this->any())
+            ->method('__get')
+            ->willReturnMap([
+                ['id', $ruleId],
+                ['name', 'ruleName'.$ruleId],
+            ]);
+
+        $mockShippingRule->expects($this->any())
+            ->method('getShippingRuleCategories')
+            ->willReturn([$this->getMockShippingRuleCategory($ruleId)]);
+
+        return $mockShippingRule;
+    }
+
+    /**
+     * @param string $categoryId
+     *
+     * @return Mock|Commerce_ShippingRuleCategoryModel
+     */
+    private function getMockShippingRuleCategory($categoryId)
+    {
+        $mockShippingRuleCategory = $this->getMockBuilder(Commerce_ShippingRuleCategoryModel::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $mockShippingRuleCategory->expects($this->any())
+            ->method('__get')
+            ->willReturnMap([
+                ['id', $categoryId],
+            ]);
+
+        $mockShippingRuleCategory->expects($this->any())
+            ->method('getCategory')
+            ->willReturn($this->getMockShippingCategory($categoryId));
+
+        return $mockShippingRuleCategory;
+    }
+
+    /**
+     * @param string $categoryId
+     *
+     * @return Mock|Commerce_ShippingCategoryModel
+     */
+    private function getMockShippingCategory($categoryId)
+    {
+        $mockShippingCategory = $this->getMockBuilder(Commerce_ShippingCategoryModel::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $mockShippingCategory->expects($this->any())
+            ->method('__get')
+            ->willReturnMap([
+                ['id', $categoryId],
+                ['handle', 'categoryHandle'.$categoryId],
+            ]);
+
+        return $mockShippingCategory;
+    }
+
+    /**
+     * @return Mock|Commerce_ShippingMethodsService
      */
     private function setMockShippingMethodsService()
     {

@@ -155,7 +155,7 @@ class ShippingCategoriesTest extends BaseTest
     /**
      * @param string $categoryId
      *
-     * @return Mock|ShippingCategoryModel
+     * @return Mock|Commerce_ShippingCategoryModel
      */
     private function getMockShippingCategory($categoryId)
     {
@@ -181,7 +181,7 @@ class ShippingCategoriesTest extends BaseTest
     }
 
     /**
-     * @return Mock|CategoriesService
+     * @return Mock|Commerce_ShippingCategoriesService
      */
     private function setMockShippingCategoriesService()
     {

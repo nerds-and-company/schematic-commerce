@@ -159,7 +159,7 @@ class OrderStatusesTest extends BaseTest
     /**
      * @param string $statusId
      *
-     * @return Mock|OrderStatusModel
+     * @return Mock|Commerce_OrderStatusModel
      */
     private function getMockOrderStatus($statusId)
     {
@@ -185,7 +185,7 @@ class OrderStatusesTest extends BaseTest
     }
 
     /**
-     * @return Mock|CategoriesService
+     * @return Mock|Commerce_OrderStatusesService
      */
     private function setMockOrderStatusesService()
     {

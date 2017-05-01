@@ -151,7 +151,7 @@ class CountriesTest extends BaseTest
     /**
      * @param string $countryId
      *
-     * @return Mock|CountryModel
+     * @return Mock|Commerce_CountryModel
      */
     private function getMockCountry($countryId)
     {
@@ -177,7 +177,7 @@ class CountriesTest extends BaseTest
     }
 
     /**
-     * @return Mock|CategoriesService
+     * @return Mock|Commerce_CountriesService
      */
     private function setMockCountriesService()
     {

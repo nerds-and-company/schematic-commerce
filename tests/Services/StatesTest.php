@@ -155,7 +155,7 @@ class StatesTest extends BaseTest
     /**
      * @param string $stateId
      *
-     * @return Mock|StateModel
+     * @return Mock|Commerce_StateModel
      */
     private function getMockState($stateId)
     {

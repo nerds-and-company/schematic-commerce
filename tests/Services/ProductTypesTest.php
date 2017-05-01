@@ -236,7 +236,7 @@ class ProductTypesTest extends BaseTest
     /**
      * @param string $typeId
      *
-     * @return Mock|ProductTypeModel
+     * @return Mock|Commerce_ProductTypeModel
      */
     private function getMockProductType($typeId)
     {
@@ -268,7 +268,7 @@ class ProductTypesTest extends BaseTest
     }
 
     /**
-     * @return Mock|CraftFieldsService
+     * @return Mock|FieldsService
      */
     private function setMockFieldsService()
     {
@@ -287,7 +287,7 @@ class ProductTypesTest extends BaseTest
     }
 
     /**
-     * @return Mock|fields
+     * @return Mock|Fields
      */
     private function setMockSchematicFields()
     {
@@ -311,7 +311,7 @@ class ProductTypesTest extends BaseTest
     }
 
     /**
-     * @return Mock|CategoriesService
+     * @return Mock|Commerce_ProductTypesService
      */
     private function setMockProductTypesService()
     {
@@ -343,7 +343,7 @@ class ProductTypesTest extends BaseTest
     }
 
     /**
-     * @return Mock|ProductTypeLocaleModel
+     * @return Mock|Commerce_ProductTypeLocaleModel
      */
     private function getMockProductTypeLocale()
     {

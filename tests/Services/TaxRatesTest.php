@@ -179,7 +179,7 @@ class TaxRatesTest extends BaseTest
     /**
      * @param string $rateId
      *
-     * @return Mock|Commce_TaxRateModel
+     * @return Mock|Commerce_TaxRateModel
      */
     private function getMockTaxRate($rateId)
     {
@@ -214,7 +214,7 @@ class TaxRatesTest extends BaseTest
     /**
      * @param string $categoryId
      *
-     * @return Mock|Commce_TaxCategoryModel
+     * @return Mock|Commerce_TaxCategoryModel
      */
     private function getMockTaxCategory($categoryId)
     {
@@ -235,7 +235,7 @@ class TaxRatesTest extends BaseTest
     /**
      * @param string $zoneId
      *
-     * @return Mock|Commce_TaxZoneModel
+     * @return Mock|Commerce_TaxZoneModel
      */
     private function getMockTaxZone($zoneId)
     {

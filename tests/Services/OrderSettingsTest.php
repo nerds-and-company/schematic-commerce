@@ -145,7 +145,7 @@ class OrderSettingsTest extends BaseTest
     //==============================================================================================================
 
     /**
-     * @return Mock|OrderSettingModel
+     * @return Mock|Commerce_OrderSettingsModel
      */
     private function getMockOrderSetting()
     {
@@ -172,7 +172,7 @@ class OrderSettingsTest extends BaseTest
     }
 
     /**
-     * @return Mock|CraftFieldsService
+     * @return Mock|FieldsService
      */
     private function setMockFieldsService()
     {
@@ -191,7 +191,7 @@ class OrderSettingsTest extends BaseTest
     }
 
     /**
-     * @return Mock|fields
+     * @return Mock|Fields
      */
     private function setMockSchematicFields()
     {
@@ -215,7 +215,7 @@ class OrderSettingsTest extends BaseTest
     }
 
     /**
-     * @return Mock|CategoriesService
+     * @return Mock|Commerce_OrderSettingsService
      */
     private function setMockOrderSettingsService()
     {

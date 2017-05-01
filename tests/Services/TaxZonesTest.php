@@ -167,7 +167,7 @@ class TaxZonesTest extends BaseTest
     /**
      * @param string $zoneId
      *
-     * @return Mock|TaxZoneModel
+     * @return Mock|Commerce_TaxZoneModel
      */
     private function getMockTaxZone($zoneId)
     {
@@ -200,7 +200,7 @@ class TaxZonesTest extends BaseTest
     }
 
     /**
-     * @return Mock|CategoriesService
+     * @return Mock|Commerce_TaxZonesService
      */
     private function setMockTaxZonesService()
     {

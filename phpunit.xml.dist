@@ -10,13 +10,12 @@
          stopOnFailure="false">
     <testsuites>
         <testsuite name="Craft Plugin Test Suite">
-            <directory>./tests</directory>
+            <directory>./tests/Services</directory>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist>
-            <directory suffix=".php">./src/models</directory>
-            <directory suffix=".php">./src/services</directory>
+            <directory suffix=".php">./src/Services</directory>
         </whitelist>
     </filter>
     <logging>
