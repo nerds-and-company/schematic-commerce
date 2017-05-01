@@ -171,7 +171,7 @@ class EmailsTest extends BaseTest
     /**
      * @param string $emailId
      *
-     * @return Mock|EmailModel
+     * @return Mock|Commerce_EmailModel
      */
     private function getMockEmail($emailId)
     {
@@ -196,7 +196,7 @@ class EmailsTest extends BaseTest
     }
 
     /**
-     * @return Mock|CategoriesService
+     * @return Mock|Commerce_EmailsService
      */
     private function setMockEmailsService()
     {

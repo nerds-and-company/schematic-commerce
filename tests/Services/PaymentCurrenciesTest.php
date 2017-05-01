@@ -155,7 +155,7 @@ class PaymentCurrenciesTest extends BaseTest
     /**
      * @param string $currencyId
      *
-     * @return Mock|PaymentCurrencyModel
+     * @return Mock|Commerce_PaymentCurrencyModel
      */
     private function getMockPaymentCurrency($currencyId)
     {
@@ -180,7 +180,7 @@ class PaymentCurrenciesTest extends BaseTest
     }
 
     /**
-     * @return Mock|CategoriesService
+     * @return Mock|Commerce_PaymentCurrenciesService
      */
     private function setMockPaymentCurrenciesService()
     {

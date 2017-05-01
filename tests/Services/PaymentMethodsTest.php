@@ -171,7 +171,7 @@ class PaymentMethodsTest extends BaseTest
     /**
      * @param string $methodId
      *
-     * @return Mock|PaymentMethodModel
+     * @return Mock|Commerce_PaymentMethodModel
      */
     private function getMockPaymentMethod($methodId)
     {
@@ -196,7 +196,7 @@ class PaymentMethodsTest extends BaseTest
     }
 
     /**
-     * @return Mock|CategoriesService
+     * @return Mock|Commerce_PaymentMethodsService
      */
     private function setMockPaymentMethodsService()
     {

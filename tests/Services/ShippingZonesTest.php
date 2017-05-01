@@ -167,7 +167,7 @@ class ShippingZonesTest extends BaseTest
     /**
      * @param string $zoneId
      *
-     * @return Mock|ShippingZoneModel
+     * @return Mock|Commerce_ShippingZoneModel
      */
     private function getMockShippingZone($zoneId)
     {
@@ -200,7 +200,7 @@ class ShippingZonesTest extends BaseTest
     }
 
     /**
-     * @return Mock|CategoriesService
+     * @return Mock|Commerce_ShippingZonesService
      */
     private function setMockShippingZonesService()
     {
