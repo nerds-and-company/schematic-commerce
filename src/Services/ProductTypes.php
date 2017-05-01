@@ -219,7 +219,7 @@ class ProductTypes extends Base
         if ($refObject->hasProperty('_productTypesById')) {
             $refProperty = $refObject->getProperty('_productTypesById');
             $refProperty->setAccessible(true);
-            $refProperty->setValue($obj, array());
+            $refProperty->setValue($obj, []);
         }
     }
 }

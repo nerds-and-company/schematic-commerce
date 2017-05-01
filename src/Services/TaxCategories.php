@@ -131,12 +131,12 @@ class TaxCategories extends Base
         if ($refObject->hasProperty('_taxCategoriesById')) {
             $refProperty = $refObject->getProperty('_taxCategoriesById');
             $refProperty->setAccessible(true);
-            $refProperty->setValue($obj, array());
+            $refProperty->setValue($obj, []);
         }
         if ($refObject->hasProperty('_taxCategoriesByHandle')) {
             $refProperty = $refObject->getProperty('_taxCategoriesByHandle');
             $refProperty->setAccessible(true);
-            $refProperty->setValue($obj, array());
+            $refProperty->setValue($obj, []);
         }
     }
 }

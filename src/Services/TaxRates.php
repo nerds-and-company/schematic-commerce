@@ -75,7 +75,7 @@ class TaxRates extends Base
     {
         Craft::log(Craft::t('Importing Commerce Tax Rates'));
 
-        $taxRates = array();
+        $taxRates = [];
         foreach (Craft::app()->commerce_taxRates->getAllTaxRates() as $taxRate) {
             $taxRates[$taxRate->name] = $taxRate;
         }

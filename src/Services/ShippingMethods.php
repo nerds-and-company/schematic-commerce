@@ -159,8 +159,7 @@ class ShippingMethods extends Base
         Craft::log(Craft::t('Importing Commerce Shipping Methods'));
 
         $this->resetCraftShippingMethodsServiceCache();
-        $this->resetCraftShippingCategoriesServiceCache();
-        $shippingMethods = array();
+        $shippingMethods = [];
         foreach (Craft::app()->commerce_shippingMethods->getAllShippingMethods() as $shippingMethod) {
             $shippingMethods[$shippingMethod->handle] = $shippingMethod;
         }
@@ -217,7 +216,7 @@ class ShippingMethods extends Base
      */
     private function populateShippingMethodRules(Commerce_ShippingMethodModel $shippingMethod, $ruleDefinitions, $force = false)
     {
-        $rules = array();
+        $rules = [];
         foreach ($shippingMethod->getRules() as $rule) {
             $rules[$rule->name] = $rule;
         }
@@ -227,7 +226,7 @@ class ShippingMethods extends Base
 
             unset($rules[$ruleName]);
 
-            $shippingZone = Commerce_ShippingZoneRecord::model()->findByAttributes(array('name' => $ruleDef['shippingZone']));
+            $shippingZone = Commerce_ShippingZoneRecord::model()->findByAttributes(['name' => $ruleDef['shippingZone']]);
 
             $rule->setAttributes([
                 'name' => $ruleName,
@@ -274,7 +273,9 @@ class ShippingMethods extends Base
      */
     private function populateShippingMethodRuleCategories(Commerce_ShippingRuleModel $rule, $categoryDefinitions)
     {
-        $categories = array();
+        $this->resetCraftShippingCategoriesServiceCache();
+
+        $categories = [];
         foreach ($rule->getShippingRuleCategories() as $category) {
             $categories[$category->getCategory()->handle] = $category;
         }
@@ -325,12 +326,12 @@ class ShippingMethods extends Base
         if ($refObject->hasProperty('_shippingCategoriesById')) {
             $refProperty = $refObject->getProperty('_shippingCategoriesById');
             $refProperty->setAccessible(true);
-            $refProperty->setValue($obj, array());
+            $refProperty->setValue($obj, []);
         }
         if ($refObject->hasProperty('_shippingCategoriesByHandle')) {
             $refProperty = $refObject->getProperty('_shippingCategoriesByHandle');
             $refProperty->setAccessible(true);
-            $refProperty->setValue($obj, array());
+            $refProperty->setValue($obj, []);
         }
     }
 }
