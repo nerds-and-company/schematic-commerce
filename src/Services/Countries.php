@@ -70,7 +70,7 @@ class Countries extends Base
     {
         Craft::log(Craft::t('Importing Commerce Countries'));
 
-        $countries = array();
+        $countries = [];
         foreach (Craft::app()->commerce_countries->getAllCountries() as $country) {
             $countries[$country->iso] = $country;
         }

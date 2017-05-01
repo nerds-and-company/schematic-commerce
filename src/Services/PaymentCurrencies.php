@@ -72,7 +72,7 @@ class PaymentCurrencies extends Base
         Craft::log(Craft::t('Importing Commerce Payment Currencies'));
 
         $this->resetCraftPaymentCurrenciesServiceCache();
-        $paymentCurrencies = array();
+        $paymentCurrencies = [];
         foreach (Craft::app()->commerce_paymentCurrencies->getAllPaymentCurrencies() as $paymentCurrency) {
             $paymentCurrencies[$paymentCurrency->iso] = $paymentCurrency;
         }

@@ -110,7 +110,7 @@ class TaxZones extends Base
     {
         Craft::log(Craft::t('Importing Commerce Tax Zones'));
 
-        $taxZones = array();
+        $taxZones = [];
         foreach (Craft::app()->commerce_taxZones->getAllTaxZones() as $taxZone) {
             $taxZones[$taxZone->name] = $taxZone;
         }
@@ -160,15 +160,15 @@ class TaxZones extends Base
             'default' => $taxZoneDefinition['default'],
         ]);
 
-        $countries = array();
+        $countries = [];
         foreach ($taxZoneDefinition['countries'] as $iso) {
-            $countries[] = Craft::app()->commerce_countries->getCountryByAttributes(array('iso' => $iso));
+            $countries[] = Craft::app()->commerce_countries->getCountryByAttributes(['iso' => $iso]);
         }
         $taxZone->setCountries($countries);
 
-        $states = array();
+        $states = [];
         foreach ($taxZoneDefinition['states'] as $abbreviation) {
-            $states[] = Craft::app()->commerce_states->getStateByAttributes(array('abbreviation' => $abbreviation));
+            $states[] = Craft::app()->commerce_states->getStateByAttributes(['abbreviation' => $abbreviation]);
         }
         $taxZone->setStates($states);
     }
@@ -182,7 +182,7 @@ class TaxZones extends Base
      */
     private function getCountryIds(Commerce_TaxZoneModel $taxZone)
     {
-        $countryIds = array();
+        $countryIds = [];
         foreach ($taxZone->getCountries() as $country) {
             $countryIds[] = $country->id;
         }
@@ -199,7 +199,7 @@ class TaxZones extends Base
      */
     private function getStateIds(Commerce_TaxZoneModel $taxZone)
     {
-        $stateIds = array();
+        $stateIds = [];
         foreach ($taxZone->getStates() as $state) {
             $stateIds[] = $state->id;
         }

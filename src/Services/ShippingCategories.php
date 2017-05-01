@@ -131,12 +131,12 @@ class ShippingCategories extends Base
         if ($refObject->hasProperty('_shippingCategoriesById')) {
             $refProperty = $refObject->getProperty('_shippingCategoriesById');
             $refProperty->setAccessible(true);
-            $refProperty->setValue($obj, array());
+            $refProperty->setValue($obj, []);
         }
         if ($refObject->hasProperty('_shippingCategoriesByHandle')) {
             $refProperty = $refObject->getProperty('_shippingCategoriesByHandle');
             $refProperty->setAccessible(true);
-            $refProperty->setValue($obj, array());
+            $refProperty->setValue($obj, []);
         }
     }
 }

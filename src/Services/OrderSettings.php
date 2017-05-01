@@ -29,7 +29,7 @@ class OrderSettings extends Base
     public function export(array $orderSettings = [])
     {
         if (!count($orderSettings)) {
-            $orderSettings = array(Craft::app()->commerce_orderSettings->getOrderSettingByHandle('order'));
+            $orderSettings = [Craft::app()->commerce_orderSettings->getOrderSettingByHandle('order')];
         }
 
         Craft::log(Craft::t('Exporting Commerce Order Settings'));
@@ -72,7 +72,8 @@ class OrderSettings extends Base
     {
         Craft::log(Craft::t('Importing Commerce Order Settings'));
 
-        $orderSettings = array('order' => Craft::app()->commerce_orderSettings->getOrderSettingByHandle('order'));
+        $settings = Craft::app()->commerce_orderSettings->getOrderSettingByHandle('order');
+        $orderSettings = $settings ? ['order' => $settings] : [];
 
         foreach ($orderSettingDefinitions as $orderSettingHandle => $orderSettingDefinition) {
             $orderSetting = array_key_exists($orderSettingHandle, $orderSettings)

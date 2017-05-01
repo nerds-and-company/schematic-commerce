@@ -110,7 +110,7 @@ class ShippingZones extends Base
     {
         Craft::log(Craft::t('Importing Commerce Shipping Zones'));
 
-        $shippingZones = array();
+        $shippingZones = [];
         foreach (Craft::app()->commerce_shippingZones->getAllShippingZones() as $shippingZone) {
             $shippingZones[$shippingZone->name] = $shippingZone;
         }
@@ -160,15 +160,15 @@ class ShippingZones extends Base
             'default' => $shippingZoneDefinition['default'],
         ]);
 
-        $countries = array();
+        $countries = [];
         foreach ($shippingZoneDefinition['countries'] as $iso) {
-            $countries[] = Craft::app()->commerce_countries->getCountryByAttributes(array('iso' => $iso));
+            $countries[] = Craft::app()->commerce_countries->getCountryByAttributes(['iso' => $iso]);
         }
         $shippingZone->setCountries($countries);
 
-        $states = array();
+        $states = [];
         foreach ($shippingZoneDefinition['states'] as $abbreviation) {
-            $states[] = Craft::app()->commerce_states->getStateByAttributes(array('abbreviation' => $abbreviation));
+            $states[] = Craft::app()->commerce_states->getStateByAttributes(['abbreviation' => $abbreviation]);
         }
         $shippingZone->setStates($states);
     }
@@ -182,7 +182,7 @@ class ShippingZones extends Base
      */
     private function getCountryIds(Commerce_ShippingZoneModel $shippingZone)
     {
-        $countryIds = array();
+        $countryIds = [];
         foreach ($shippingZone->getCountries() as $country) {
             $countryIds[] = $country->id;
         }
@@ -199,7 +199,7 @@ class ShippingZones extends Base
      */
     private function getStateIds(Commerce_ShippingZoneModel $shippingZone)
     {
-        $stateIds = array();
+        $stateIds = [];
         foreach ($shippingZone->getStates() as $state) {
             $stateIds[] = $state->id;
         }

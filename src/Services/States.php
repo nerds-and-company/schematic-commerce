@@ -70,7 +70,7 @@ class States extends Base
     {
         Craft::log(Craft::t('Importing Commerce States'));
 
-        $states = array();
+        $states = [];
         foreach (Craft::app()->commerce_states->getAllStates() as $state) {
             $states[$state->abbreviation] = $state;
         }
@@ -109,7 +109,7 @@ class States extends Base
      */
     private function populateState(Commerce_StateModel $state, array $stateDefinition, $stateHandle)
     {
-        $country = Craft::app()->commerce_countries->getCountryByAttributes(array('iso' => $stateDefinition['country']));
+        $country = Craft::app()->commerce_countries->getCountryByAttributes(['iso' => $stateDefinition['country']]);
 
         $state->setAttributes([
             'abbreviation' => $stateHandle,

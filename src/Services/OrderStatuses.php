@@ -72,7 +72,7 @@ class OrderStatuses extends Base
     {
         Craft::log(Craft::t('Importing Commerce Order Statuses'));
 
-        $orderStatuses = array();
+        $orderStatuses = [];
         foreach (Craft::app()->commerce_orderStatuses->getAllOrderStatuses() as $orderStatus) {
             $orderStatuses[$orderStatus->handle] = $orderStatus;
         }
@@ -86,7 +86,7 @@ class OrderStatuses extends Base
 
             $this->populateOrderStatus($orderStatus, $orderStatusDefinition, $orderStatusHandle);
 
-            if (!Craft::app()->commerce_orderStatuses->saveOrderStatus($orderStatus, array())) { // Save orderstatus via craft
+            if (!Craft::app()->commerce_orderStatuses->saveOrderStatus($orderStatus, [])) { // Save orderstatus via craft
                 $this->addErrors($orderStatus->getAllErrors());
 
                 continue;

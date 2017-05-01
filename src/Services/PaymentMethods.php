@@ -75,7 +75,7 @@ class PaymentMethods extends Base
     {
         Craft::log(Craft::t('Importing Commerce Payment Methods'));
 
-        $paymentMethods = array();
+        $paymentMethods = [];
         foreach (Craft::app()->commerce_paymentMethods->getAllPaymentMethods() as $paymentMethod) {
             $paymentMethods[$paymentMethod->name] = $paymentMethod;
         }

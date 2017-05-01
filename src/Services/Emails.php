@@ -75,7 +75,7 @@ class Emails extends Base
     {
         Craft::log(Craft::t('Importing Commerce Emails'));
 
-        $emails = array();
+        $emails = [];
         foreach (Craft::app()->commerce_emails->getAllEmails() as $email) {
             $emails[$email->name] = $email;
         }
