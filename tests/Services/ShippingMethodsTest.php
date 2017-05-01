@@ -231,7 +231,7 @@ class ShippingMethodsTest extends BaseTest
 
         $mockShippingRuleCategory->expects($this->any())
             ->method('getCategory')
-            ->willReturn([$this->getMockShippingCategory($categoryId)]);
+            ->willReturn($this->getMockShippingCategory($categoryId));
 
         return $mockShippingRuleCategory;
     }
