@@ -57,6 +57,7 @@ class OrderStatuses extends Base
             'color' => $orderStatus->color,
             'sortOrder' => $orderStatus->sortOrder,
             'default' => $orderStatus->default,
+            'emails' => array_column($orderStatus->getEmails(), 'name'),
         ];
     }
 
@@ -77,6 +78,11 @@ class OrderStatuses extends Base
             $orderStatuses[$orderStatus->handle] = $orderStatus;
         }
 
+        $emails = [];
+        foreach (Craft::app()->commerce_emails->getAllEmails() as $email) {
+            $emails[$email->name] = $email;
+        }
+
         foreach ($orderStatusDefinitions as $orderStatusHandle => $orderStatusDefinition) {
             $orderStatus = array_key_exists($orderStatusHandle, $orderStatuses)
                 ? $orderStatuses[$orderStatusHandle]
@@ -85,8 +91,16 @@ class OrderStatuses extends Base
             unset($orderStatuses[$orderStatusHandle]);
 
             $this->populateOrderStatus($orderStatus, $orderStatusDefinition, $orderStatusHandle);
+            $emailIds = [];
+            if (is_array(@$orderStatusDefinition['emails'])) {
+                foreach ($orderStatusDefinition['emails'] as $emailName) {
+                    if (array_key_exists($emailName, $emails)) {
+                        $emailIds[] = $emails[$emailName]->id;
+                    }
+                }
+            }
 
-            if (!Craft::app()->commerce_orderStatuses->saveOrderStatus($orderStatus, [])) { // Save orderstatus via craft
+            if (!Craft::app()->commerce_orderStatuses->saveOrderStatus($orderStatus, $emailIds)) { // Save orderstatus via craft
                 $this->addErrors($orderStatus->getAllErrors());
 
                 continue;

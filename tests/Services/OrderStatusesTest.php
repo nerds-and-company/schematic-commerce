@@ -5,6 +5,7 @@ namespace NerdsAndCompany\Schematic\Commerce\Services;
 use Craft\BaseTest;
 use Craft\Commerce_OrderStatusModel;
 use Craft\Commerce_OrderStatusesService;
+use Craft\Commerce_EmailsService;
 use Craft\Craft;
 use Craft\DbCommand;
 use Craft\DbConnection;
@@ -55,6 +56,7 @@ class OrderStatusesTest extends BaseTest
     public function testSuccessfulImport(array $statusDefinitions)
     {
         $this->setMockOrderStatusesService();
+        $this->setMockEmailsService();
         $this->setMockDbConnection();
 
         $schematicOrderStatusesService = new OrderStatuses();
@@ -74,6 +76,7 @@ class OrderStatusesTest extends BaseTest
     public function testImportWithForceOption(array $statusDefinitions)
     {
         $this->setMockOrderStatusesService();
+        $this->setMockEmailsService();
         $this->setMockDbConnection();
 
         $schematicOrderStatusesService = new OrderStatuses();
@@ -104,6 +107,7 @@ class OrderStatusesTest extends BaseTest
                         'color' => null,
                         'sortOrder' => null,
                         'default' => null,
+                        'emails' => [],
                     ],
                 ],
             ],
@@ -118,12 +122,14 @@ class OrderStatusesTest extends BaseTest
                         'color' => null,
                         'sortOrder' => null,
                         'default' => null,
+                        'emails' => [],
                     ],
                     'statusHandle2' => [
                         'name' => 'statusName2',
                         'color' => null,
                         'sortOrder' => null,
                         'default' => null,
+                        'emails' => [],
                     ],
                 ],
             ],
@@ -146,6 +152,7 @@ class OrderStatusesTest extends BaseTest
                         'color' => null,
                         'sortOrder' => null,
                         'default' => null,
+                        'emails' => [],
                     ],
                 ],
             ],
@@ -181,6 +188,10 @@ class OrderStatusesTest extends BaseTest
                 'ohnoes' => 'horrible error',
             ]);
 
+        $mockOrderStatus->expects($this->any())
+            ->method('getEmails')
+            ->willReturn([]);
+
         return $mockOrderStatus;
     }
 
@@ -201,6 +212,25 @@ class OrderStatusesTest extends BaseTest
         $this->setComponent(Craft::app(), 'commerce_orderStatuses', $mockOrderStatusesService);
 
         return $mockOrderStatusesService;
+    }
+
+    /**
+     * @return Mock|Commerce_EmailsService
+     */
+    private function setMockEmailsService()
+    {
+        $mockEmailsService = $this->getMockBuilder(Commerce_EmailsService::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getAllEmails', 'saveEmail', 'deleteEmailById'])
+            ->getMock();
+
+        $mockEmailsService->expects($this->any())
+            ->method('getAllEmails')
+            ->willReturn([]);
+
+        $this->setComponent(Craft::app(), 'commerce_emails', $mockEmailsService);
+
+        return $mockEmailsService;
     }
 
     /**
