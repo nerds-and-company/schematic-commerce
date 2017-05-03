@@ -23,8 +23,8 @@ public function registerMigrationService()
 {
     return [
         'commerce_orderSettings' => new Commerce\OrderSettings(),
-        'commerce_orderStatuses' => new Commerce\OrderStatuses(),
         'commerce_emails' => new Commerce\Emails(),
+        'commerce_orderStatuses' => new Commerce\OrderStatuses(),
         'commerce_paymentMethods' => new Commerce\PaymentMethods(),
         'commerce_paymentCurrencies' => new Commerce\PaymentCurrencies(),
         'commerce_productTypes' => new Commerce\ProductTypes(),
