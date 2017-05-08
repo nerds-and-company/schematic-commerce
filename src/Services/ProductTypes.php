@@ -70,6 +70,7 @@ class ProductTypes extends Base
             'locales' => $this->getLocaleDefinitions($productType->getLocales()),
             'fieldLayout' => Craft::app()->schematic_fields->getFieldLayoutDefinition($fieldLayout),
             'variantFieldLayout' => Craft::app()->schematic_fields->getFieldLayoutDefinition($variantFieldLayout),
+            'taxCategories' => array_column($productType->getTaxCategories(), 'handle'),
         ];
     }
 
@@ -168,6 +169,7 @@ class ProductTypes extends Base
             'template' => $productTypeDefinition['template'],
         ]);
 
+        $this->populateProductTypeCategories($productType, $productTypeDefinition['taxCategories']);
         $this->populateProductTypeLocales($productType, $productTypeDefinition['locales']);
 
         $fieldLayout = Craft::app()->schematic_fields->getFieldLayout($productTypeDefinition['fieldLayout']);
@@ -202,6 +204,21 @@ class ProductTypes extends Base
         }
 
         $productType->setLocales($locales);
+    }
+
+    /**
+     * Populate productTypeCategories.
+     *
+     * @param Commerce_ProductTypeModel $productType
+     * @param $categoryDefinitions
+     */
+    private function populateProductTypeCategories(Commerce_ProductTypeModel $productType, $categoryDefinitions)
+    {
+        $taxCategoryIds = [];
+        foreach ($categoryDefinitions as $handle) {
+            $taxCategoryIds[] = Craft::app()->commerce_taxCategories->getTaxCategoryByHandle($handle)->id;
+        }
+        $productType->setTaxCategories($taxCategoryIds);
     }
 
     /**
