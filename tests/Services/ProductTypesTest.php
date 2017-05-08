@@ -130,6 +130,7 @@ class ProductTypesTest extends BaseTest
                         'variantFieldLayout' => [
                             'fields' => [],
                         ],
+                        'taxCategories' => [],
                     ],
                 ],
             ],
@@ -161,6 +162,7 @@ class ProductTypesTest extends BaseTest
                         'variantFieldLayout' => [
                             'fields' => [],
                         ],
+                        'taxCategories' => [],
                     ],
                     'typeHandle2' => [
                         'name' => 'typeName2',
@@ -184,6 +186,7 @@ class ProductTypesTest extends BaseTest
                         'variantFieldLayout' => [
                             'fields' => [],
                         ],
+                        'taxCategories' => [],
                     ],
                 ],
             ],
@@ -223,6 +226,7 @@ class ProductTypesTest extends BaseTest
                         'variantFieldLayout' => [
                             'fields' => [],
                         ],
+                        'taxCategories' => [],
                     ],
                 ],
             ],
@@ -257,6 +261,10 @@ class ProductTypesTest extends BaseTest
         $mockProductType->expects($this->any())
             ->method('getLocales')
             ->willReturn([$this->getMockProductTypeLocale()]);
+
+        $mockProductType->expects($this->any())
+            ->method('getTaxCategories')
+            ->willReturn([]);
 
         $mockProductType->expects($this->any())
             ->method('getAllErrors')
