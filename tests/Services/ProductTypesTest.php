@@ -124,6 +124,8 @@ class ProductTypesTest extends BaseTest
                                 'urlFormat' => null,
                             ],
                         ],
+                        'taxCategories' => [],
+                        'shippingCategories' => [],
                         'fieldLayout' => [
                             'fields' => [],
                         ],
@@ -155,6 +157,8 @@ class ProductTypesTest extends BaseTest
                                 'urlFormat' => null,
                             ],
                         ],
+                        'taxCategories' => [],
+                        'shippingCategories' => [],
                         'fieldLayout' => [
                             'fields' => [],
                         ],
@@ -178,6 +182,8 @@ class ProductTypesTest extends BaseTest
                                 'urlFormat' => null,
                             ],
                         ],
+                        'taxCategories' => [],
+                        'shippingCategories' => [],
                         'fieldLayout' => [
                             'fields' => [],
                         ],
@@ -217,6 +223,8 @@ class ProductTypesTest extends BaseTest
                                 'urlFormat' => null,
                             ],
                         ],
+                        'taxCategories' => [],
+                        'shippingCategories' => [],
                         'fieldLayout' => [
                             'fields' => [],
                         ],
@@ -257,6 +265,14 @@ class ProductTypesTest extends BaseTest
         $mockProductType->expects($this->any())
             ->method('getLocales')
             ->willReturn([$this->getMockProductTypeLocale()]);
+
+        $mockProductType->expects($this->any())
+            ->method('getTaxCategories')
+            ->willReturn([]);
+
+        $mockProductType->expects($this->any())
+            ->method('getShippingCategories')
+            ->willReturn([]);
 
         $mockProductType->expects($this->any())
             ->method('getAllErrors')

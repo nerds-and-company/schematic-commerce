@@ -68,6 +68,8 @@ class ProductTypes extends Base
             'lineItemFormat' => $productType->lineItemFormat,
             'template' => $productType->template,
             'locales' => $this->getLocaleDefinitions($productType->getLocales()),
+            'taxCategories' => $this->getTaxCategoryDefinitions($productType->getTaxCategories()),
+            'shippingCategories' => $this->getShippingCategoryDefinitions($productType->getShippingCategories()),
             'fieldLayout' => Craft::app()->schematic_fields->getFieldLayoutDefinition($fieldLayout),
             'variantFieldLayout' => Craft::app()->schematic_fields->getFieldLayoutDefinition($variantFieldLayout),
         ];
@@ -89,6 +91,42 @@ class ProductTypes extends Base
         }
 
         return $localeDefinitions;
+    }
+
+    /**
+     * Get TaxCategoryDefinitions.
+     *
+     * @param Commerce_TaxCategory[] $taxCategories
+     *
+     * @return array
+     */
+    private function getTaxCategoryDefinitions(array $taxCategories)
+    {
+        $taxCategoryDefinitions = [];
+
+        foreach ($taxCategories as $taxCategory) {
+            $taxCategoryDefinitions[] = $taxCategory->handle;
+        }
+
+        return $taxCategoryDefinitions;
+    }
+
+    /**
+     * Get ShippingCategoryDefinitions.
+     *
+     * @param Commerce_ShippingCategory[] $shippingCategories
+     *
+     * @return array
+     */
+    private function getShippingCategoryDefinitions(array $shippingCategories)
+    {
+        $shippingCategoryDefinitions = [];
+
+        foreach ($shippingCategories as $shippingCategory) {
+            $shippingCategoryDefinitions[] = $shippingCategory->handle;
+        }
+
+        return $shippingCategoryDefinitions;
     }
 
     /**
@@ -169,6 +207,8 @@ class ProductTypes extends Base
         ]);
 
         $this->populateProductTypeLocales($productType, $productTypeDefinition['locales']);
+        $this->populateProductTypeTaxCategories($productType, $productTypeDefinition['taxCategories']);
+        $this->populateProductTypeShippingCategories($productType, $productTypeDefinition['shippingCategories']);
 
         $fieldLayout = Craft::app()->schematic_fields->getFieldLayout($productTypeDefinition['fieldLayout']);
         $productType->setFieldLayout($fieldLayout);
@@ -202,6 +242,36 @@ class ProductTypes extends Base
         }
 
         $productType->setLocales($locales);
+    }
+
+    /**
+     * Populate productTypeTaxCategories.
+     *
+     * @param Commerce_ProductTypeModel $productType
+     * @param $categoryDefinitions
+     */
+    private function populateProductTypeTaxCategories(Commerce_ProductTypeModel $productType, $taxCategoryDefinitions)
+    {
+        $taxCategoryIds = [];
+        foreach ($taxCategoryDefinitions as $handle) {
+            $taxCategoryIds[] = Craft::app()->commerce_taxCategories->getTaxCategoryByHandle($handle)->id;
+        }
+        $productType->setTaxCategories($taxCategoryIds);
+    }
+
+    /**
+     * Populate ProductTypeShippingCategories.
+     *
+     * @param  $productType
+     * @param  $shippingCategoryDefinitions
+     */
+    private function populateProductTypeShippingCategories(Commerce_ProductTypeModel $productType, $shippingCategoryDefinitions)
+    {
+        $shippingCategoryIds = [];
+        foreach ($shippingCategoryDefinitions as $handle) {
+            $shippingCategoryIds[] = Craft::app()->commerce_shippingCategories->getShippingCategoryByHandle($handle)->id;
+        }
+        $productType->setShippingCategories($shippingCategoryIds);
     }
 
     /**
