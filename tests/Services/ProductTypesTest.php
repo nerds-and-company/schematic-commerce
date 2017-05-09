@@ -124,13 +124,14 @@ class ProductTypesTest extends BaseTest
                                 'urlFormat' => null,
                             ],
                         ],
+                        'taxCategories' => [],
+                        'shippingCategories' => [],
                         'fieldLayout' => [
                             'fields' => [],
                         ],
                         'variantFieldLayout' => [
                             'fields' => [],
                         ],
-                        'taxCategories' => [],
                     ],
                 ],
             ],
@@ -156,13 +157,14 @@ class ProductTypesTest extends BaseTest
                                 'urlFormat' => null,
                             ],
                         ],
+                        'taxCategories' => [],
+                        'shippingCategories' => [],
                         'fieldLayout' => [
                             'fields' => [],
                         ],
                         'variantFieldLayout' => [
                             'fields' => [],
                         ],
-                        'taxCategories' => [],
                     ],
                     'typeHandle2' => [
                         'name' => 'typeName2',
@@ -180,13 +182,14 @@ class ProductTypesTest extends BaseTest
                                 'urlFormat' => null,
                             ],
                         ],
+                        'taxCategories' => [],
+                        'shippingCategories' => [],
                         'fieldLayout' => [
                             'fields' => [],
                         ],
                         'variantFieldLayout' => [
                             'fields' => [],
                         ],
-                        'taxCategories' => [],
                     ],
                 ],
             ],
@@ -220,13 +223,14 @@ class ProductTypesTest extends BaseTest
                                 'urlFormat' => null,
                             ],
                         ],
+                        'taxCategories' => [],
+                        'shippingCategories' => [],
                         'fieldLayout' => [
                             'fields' => [],
                         ],
                         'variantFieldLayout' => [
                             'fields' => [],
                         ],
-                        'taxCategories' => [],
                     ],
                 ],
             ],
@@ -264,6 +268,10 @@ class ProductTypesTest extends BaseTest
 
         $mockProductType->expects($this->any())
             ->method('getTaxCategories')
+            ->willReturn([]);
+
+        $mockProductType->expects($this->any())
+            ->method('getShippingCategories')
             ->willReturn([]);
 
         $mockProductType->expects($this->any())

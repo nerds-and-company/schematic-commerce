@@ -69,7 +69,7 @@ class ProductTypes extends Base
             'template' => $productType->template,
             'locales' => $this->getLocaleDefinitions($productType->getLocales()),
             'taxCategories' => $this->getTaxCategoryDefinitions($productType->getTaxCategories()),
-            'shippingCategories' => $this->getShippngCategoryDefinitions($productType->getShippingCategories()),
+            'shippingCategories' => $this->getShippingCategoryDefinitions($productType->getShippingCategories()),
             'fieldLayout' => Craft::app()->schematic_fields->getFieldLayoutDefinition($fieldLayout),
             'variantFieldLayout' => Craft::app()->schematic_fields->getFieldLayoutDefinition($variantFieldLayout),
         ];
@@ -96,7 +96,7 @@ class ProductTypes extends Base
     /**
      * Get TaxCategoryDefinitions.
      *
-     * @param ProductTypeTaxCategories[]
+     * @param Commerce_TaxCategory[] $taxCategories
      *
      * @return array
      */
@@ -112,13 +112,13 @@ class ProductTypes extends Base
     }
 
     /**
-     * Get ShippngCategoryDefinitions.
+     * Get ShippingCategoryDefinitions.
      *
-     * @param ProductTypeShippingCategories[]
+     * @param commerce_shippingCategories[] $shippingCategories
      *
      * @return array
      */
-    private function getShippngCategoryDefinitions(array $shippingCategories)
+    private function getShippingCategoryDefinitions(array $shippingCategories)
     {
         $shippingCategoryDefinitions = [];
 
@@ -206,9 +206,9 @@ class ProductTypes extends Base
             'template' => $productTypeDefinition['template'],
         ]);
 
+        $this->populateProductTypeLocales($productType, $productTypeDefinition['locales']);
         $this->populateProductTypeTaxCategories($productType, $productTypeDefinition['taxCategories']);
         $this->populateProductTypeShippingCategories($productType, $productTypeDefinition['shippingCategories']);
-        $this->populateProductTypeLocales($productType, $productTypeDefinition['locales']);
 
         $fieldLayout = Craft::app()->schematic_fields->getFieldLayout($productTypeDefinition['fieldLayout']);
         $productType->setFieldLayout($fieldLayout);
