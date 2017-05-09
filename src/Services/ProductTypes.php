@@ -114,7 +114,7 @@ class ProductTypes extends Base
     /**
      * Get ShippingCategoryDefinitions.
      *
-     * @param commerce_shippingCategories[] $shippingCategories
+     * @param Commerce_ShippingCategory[] $shippingCategories
      *
      * @return array
      */
