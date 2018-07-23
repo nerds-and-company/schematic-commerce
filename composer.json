@@ -1,6 +1,8 @@
 {
+    "version": "2.0.0",
     "name": "nerds-and-company/schematic-commerce",
     "description": "Synchronize Commerce settings with Schematic",
+    "type": "craft-plugin",
     "authors": [
         {
             "name": "Bart van Gennep",
@@ -16,14 +18,27 @@
         }
     ],
     "license": "MIT",
+    "extra": {
+        "handle": "schematic-commerce",
+        "name": "Schematic Commerce",
+        "class": "NerdsAndCompany\\Schematic\\Commerce\\SchematicCommerce",
+        "developer": "Nerds & Company",
+        "developerUrl": "https://nerds.company",
+        "documentationUrl": "https://github.com/nerds-and-company/schematic-commerce/blob/master/README.md",
+        "changelogUrl": "https://github.com/nerds-and-company/schematic-commerce/blob/master/CHANGELOG.md",
+        "downloadUrl": "https://github.com/nerds-and-company/schematic-commerce/releases/latest"
+    },
     "require": {
-        "php": ">=5.5",
-        "nerds-and-company/schematic": "^3.8"
+        "php": "^7.0",
+        "craftcms/commerce": "^2.0@beta",
+        "nerds-and-company/schematic": ">=4.0.13"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.5.0"
+        "codeception/codeception": "^2.4",
+        "squizlabs/php_codesniffer": "^3.2",
+        "phpmd/phpmd": "^2.6"
     },
-    "autoload" : {
+    "autoload": {
         "psr-4": {
             "NerdsAndCompany\\Schematic\\Commerce\\": "src/"
         }

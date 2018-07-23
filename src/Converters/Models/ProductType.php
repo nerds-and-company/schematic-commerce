@@ -1,0 +1,53 @@
+<?php
+
+namespace NerdsAndCompany\Schematic\Commerce\Converters\Models;
+
+use Craft;
+use craft\base\Model;
+use NerdsAndCompany\Schematic\Converters\Models\Base;
+
+/**
+ * Schematic Commerce Product Type Converter.
+ *
+ * Sync Craft Setups.
+ *
+ * @author    Nerds & Company
+ * @copyright Copyright (c) 2015-2018, Nerds & Company
+ * @license   MIT
+ *
+ * @see      http://www.nerds.company
+ */
+class ProductType extends Base
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function getRecordDefinition(Model $record): array
+    {
+        $definition = parent::getRecordDefinition($record);
+
+        unset($definition['attributes']['variantFieldLayoutId']);
+
+        return $definition;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function saveRecord(Model $record, array $definition): bool
+    {
+        $commerce = Craft::$app->getPlugins()->getPlugin('commerce');
+
+        return $commerce->getProductTypes()->saveProductType($record);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function deleteRecord(Model $record): bool
+    {
+        $commerce = Craft::$app->getPlugins()->getPlugin('commerce');
+
+        return $commerce->getProductType()->deleteProductTypeById($record->id);
+    }
+}

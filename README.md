@@ -1,4 +1,4 @@
-# Schematic for Commerce [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nerds-and-company/schematic-commerce/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nerds-and-company/schematic-commerce/?branch=master) [![Build Status](https://travis-ci.org/nerds-and-company/schematic-commerce.svg?branch=master)](https://travis-ci.org/nerds-and-company/schematic-commerce) [![Code Coverage](https://scrutinizer-ci.com/g/nerds-and-company/schematic-commerce/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/nerds-and-company/schematic-commerce/?branch=master)
+# Schematic for Commerce (for Craft 3 and Commerce 2) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nerds-and-company/schematic-commerce/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nerds-and-company/schematic-commerce/?branch=master) [![Build Status](https://travis-ci.org/nerds-and-company/schematic-commerce.svg?branch=master)](https://travis-ci.org/nerds-and-company/schematic-commerce) [![Code Coverage](https://scrutinizer-ci.com/g/nerds-and-company/schematic-commerce/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/nerds-and-company/schematic-commerce/?branch=master)
 
 Schematic for Commerce is a package for synchronizing Commerce settings with [Schematic](https://github.com/nerds-and-company/schematic).
 
@@ -13,32 +13,6 @@ composer require nerds-and-company/schematic-commerce
 This will add `nerds-and-company/schematic-commerce` as a requirement to your  project's `composer.json` file and install the source-code into the `vendor/nerds-and-company/schematic-commerce` directory.
 
 ## Usage
-
-This package should be loaded with a Craft plugin, which implements the `registerMigrationService()` hook of Schematic:
-
-```php
-use NerdsAndCompany\Schematic\Commerce\Services as Commerce;
-
-public function registerMigrationService()
-{
-    return [
-        'commerce_orderSettings' => new Commerce\OrderSettings(),
-        'commerce_emails' => new Commerce\Emails(),
-        'commerce_orderStatuses' => new Commerce\OrderStatuses(),
-        'commerce_paymentMethods' => new Commerce\PaymentMethods(),
-        'commerce_paymentCurrencies' => new Commerce\PaymentCurrencies(),
-        'commerce_taxCategories' => new Commerce\TaxCategories(),
-        'commerce_shippingCategories' => new Commerce\ShippingCategories(),
-        'commerce_productTypes' => new Commerce\ProductTypes(),
-        'commerce_countries' => new Commerce\Countries(),
-        'commerce_states' => new Commerce\States(),
-        'commerce_taxZones' => new Commerce\TaxZones(),
-        'commerce_taxRates' => new Commerce\TaxRates(),
-        'commerce_shippingZones' => new Commerce\ShippingZones(),
-        'commerce_shippingMethods' => new Commerce\ShippingMethods(),
-    ];
-}
-```
 
 Here is a list of all of the supported Commerce data types:
 
