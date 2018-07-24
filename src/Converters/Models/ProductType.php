@@ -44,6 +44,19 @@ class ProductType extends Base
     /**
      * {@inheritdoc}
      */
+    public function setRecordAttributes(Model &$record, array $definition, array $defaultAttributes)
+    {
+        parent::setRecordAttributes($record, $definition, $defaultAttributes);
+
+        // Set variant field layout
+        if (array_key_exists('variantFieldLayout', $definition)) {
+            $record->getBehavior('variantFieldLayout')->setFieldLayout($this->getFieldLayout($definition['variantFieldLayout']));
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function saveRecord(Model $record, array $definition): bool
     {
         $commerce = Craft::$app->getPlugins()->getPlugin('commerce');
@@ -58,6 +71,6 @@ class ProductType extends Base
     {
         $commerce = Craft::$app->getPlugins()->getPlugin('commerce');
 
-        return $commerce->getProductType()->deleteProductTypeById($record->id);
+        return $commerce->getProductTypes()->deleteProductTypeById($record->id);
     }
 }
