@@ -4,6 +4,7 @@ namespace NerdsAndCompany\Schematic\Commerce\Converters\Models;
 
 use Craft;
 use craft\base\Model;
+use craft\commerce\models\ProductTypeSite;
 use NerdsAndCompany\Schematic\Converters\Models\Base;
 
 /**
@@ -26,7 +27,16 @@ class ProductType extends Base
     {
         $definition = parent::getRecordDefinition($record);
 
+        // Also define variant field layout
+        if (isset($definition['attributes']['variantFieldLayoutId'])) {
+            $definition['variantFieldLayout'] = $this->getFieldLayoutDefinition($record->getVariantFieldLayout());
+        }
         unset($definition['attributes']['variantFieldLayoutId']);
+
+        if ($record instanceof ProductTypeSite) {
+            unset($definition['attributes']['productTypeId']);
+            unset($definition['attributes']['siteId']);
+        }
 
         return $definition;
     }
