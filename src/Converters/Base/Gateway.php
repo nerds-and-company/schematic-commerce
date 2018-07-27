@@ -36,6 +36,6 @@ class Gateway extends Base
     {
         $commerce = Craft::$app->getPlugins()->getPlugin('commerce');
 
-        return $commerce->getGateweays()->archiveGatewayById($record->id);
+        return $commerce->getGateways()->archiveGatewayById($record->id);
     }
 }
