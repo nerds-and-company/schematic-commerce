@@ -27,6 +27,21 @@ class OrderStatus extends Base
     /**
      * {@inheritdoc}
      */
+    public function getRecordDefinition(Model $record): array
+    {
+        $definition = parent::getRecordDefinition($record);
+
+        $definition['emails'] = [];
+        foreach ($record->getEmails() as $email) {
+            $definition['emails'][] = $email->name;
+        }
+
+        return $definition;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function saveRecord(Model $record, array $definition): bool
     {
         $commerce = Craft::$app->getPlugins()->getPlugin('commerce');
