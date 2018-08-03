@@ -40,28 +40,31 @@ class SchematicCommerce extends Plugin
      */
     public function init()
     {
-        // Register extra data types
         $schematic = Craft::$app->plugins->getPlugin('schematic');
-        $config = [
-            'components' => $schematic->components,
-            'dataTypes' => array_merge($schematic->dataTypes, [
-                'countries' => CountryDataType::class,
-                'emails' => EmailDataType::class,
-                'gateways' => GatewaysDataType::class,
-                'orderSettings' => OrderSettingsDataType::class,
-                'orderStatuses' => OrderStatusesDataType::class,
-                'paymentCurrencies' => PaymentCurrenciesDataType::class,
-                'productTypes' => ProductTypesDataType::class,
-                'shippingCategories' => ShippingCategoriesDataType::class,
-                'shippingMethods' => ShippingMethodsDataType::class,
-                'shippingZones' => ShippingAddressZonesDataType::class,
-                'states' => StatesDataType::class,
-                'taxCategories' => TaxCategoriesDataType::class,
-                'taxRates' => TaxRatesDataType::class,
-                'taxZones' => TaxAddressZonesDataType::class,
-            ]),
-        ];
-        Craft::configure($schematic, $config);
+
+        if ($schematic) {
+            // Register extra data types
+            $config = [
+                'components' => $schematic->components,
+                'dataTypes' => array_merge($schematic->dataTypes, [
+                    'countries' => CountryDataType::class,
+                    'emails' => EmailDataType::class,
+                    'gateways' => GatewaysDataType::class,
+                    'orderSettings' => OrderSettingsDataType::class,
+                    'orderStatuses' => OrderStatusesDataType::class,
+                    'paymentCurrencies' => PaymentCurrenciesDataType::class,
+                    'productTypes' => ProductTypesDataType::class,
+                    'shippingCategories' => ShippingCategoriesDataType::class,
+                    'shippingMethods' => ShippingMethodsDataType::class,
+                    'shippingZones' => ShippingAddressZonesDataType::class,
+                    'states' => StatesDataType::class,
+                    'taxCategories' => TaxCategoriesDataType::class,
+                    'taxRates' => TaxRatesDataType::class,
+                    'taxZones' => TaxAddressZonesDataType::class,
+                ]),
+            ];
+            Craft::configure($schematic, $config);
+        }
 
         // Init plugin
         parent::init();
