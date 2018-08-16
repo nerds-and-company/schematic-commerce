@@ -27,11 +27,9 @@ class PaymentCurrency extends Base
         return [
             'class' => get_class($record),
             'attributes' => [
-                'minorUnit' => $record->getMinorUnit(),
-                'alphabeticCode' => $record->getAlphabeticCode(),
-                'currency' => $record->getCurrency(),
-                'numericCode' => $record->getNumericCode(),
-                'entity' => $record->getEntity(),
+                'iso' => $record->iso,
+                'primary' => $record->primary,
+                'rate' => $record->rate,
             ],
         ];
     }
