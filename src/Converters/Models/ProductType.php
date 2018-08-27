@@ -73,4 +73,19 @@ class ProductType extends Base
 
         return $commerce->getProductTypes()->deleteProductTypeById($record->id);
     }
+
+    /**
+     * Reset craft commerce product types cache using reflection.
+     */
+    public function afterImport()
+    {
+        $commerce = Craft::$app->getPlugins()->getPlugin('commerce');
+        $obj = $commerce->getProductTypes();
+        $refObject = new \ReflectionObject($obj);
+        if ($refObject->hasProperty('_fetchedAllProductTypes')) {
+            $refProperty1 = $refObject->getProperty('_fetchedAllProductTypes');
+            $refProperty1->setAccessible(true);
+            $refProperty1->setValue($obj, false);
+        }
+    }
 }
