@@ -7,6 +7,7 @@ use yii\base\Event;
 use craft\base\Plugin;
 use NerdsAndCompany\Schematic\Schematic;
 use NerdsAndCompany\Schematic\Events\ConverterEvent;
+use NerdsAndCompany\Schematic\Events\SourceMappingEvent;
 use NerdsAndCompany\Schematic\Commerce\DataTypes\CountryDataType;
 use NerdsAndCompany\Schematic\Commerce\DataTypes\EmailDataType;
 use NerdsAndCompany\Schematic\Commerce\DataTypes\GatewaysDataType;
@@ -40,9 +41,10 @@ class SchematicCommerce extends Plugin
      */
     public function init()
     {
-        $schematic = Craft::$app->plugins->getPlugin('schematic');
+        $schematic = Craft::$app->getPlugins()->getPlugin('schematic');
+        $commerce = Craft::$app->getPlugins()->getPlugin('commerce');
 
-        if ($schematic) {
+        if ($schematic && $commerce) {
             // Register extra data types
             $config = [
                 'components' => $schematic->components,
@@ -75,6 +77,18 @@ class SchematicCommerce extends Plugin
             if (strpos($modelClass, 'craft\\commerce') !== false) {
                 $converterClass = 'NerdsAndCompany\\Schematic\\Commerce\\Converters\\'.ucfirst(str_replace('craft\\commerce\\', '', $modelClass));
                 $event->converterClass = $converterClass;
+            }
+        });
+
+        // Register source mappings
+        Event::on(Schematic::class, Schematic::EVENT_MAP_SOURCE, function (SourceMappingEvent $event) use ($commerce) {
+            list($sourceType, $sourceFrom) = explode(':', $event->source);
+
+            switch ($sourceType) {
+                case 'commerce-manageProductType':
+                    $event->service = $commerce->getProductTypes();
+                    $event->method = 'getProductTypeBy';
+                    break;
             }
         });
     }
