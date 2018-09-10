@@ -42,7 +42,6 @@ class SchematicCommerce extends Plugin
     public function init()
     {
         $schematic = Craft::$app->getPlugins()->getPlugin('schematic');
-        $commerce = Craft::$app->getPlugins()->getPlugin('commerce');
 
         if ($schematic) {
             // Register extra data types
@@ -81,13 +80,16 @@ class SchematicCommerce extends Plugin
         });
 
         // Register source mappings
-        Event::on(Schematic::class, Schematic::EVENT_MAP_SOURCE, function (SourceMappingEvent $event) use ($commerce) {
+        Event::on(Schematic::class, Schematic::EVENT_MAP_SOURCE, function (SourceMappingEvent $event) {
             list($sourceType, $sourceFrom) = explode(':', $event->source);
 
             switch ($sourceType) {
                 case 'commerce-manageProductType':
-                    $event->service = $commerce->getProductTypes();
-                    $event->method = 'getProductTypeBy';
+                    $commerce = Craft::$app->getPlugins()->getPlugin('commerce');
+                    if ($commerce) {
+                        $event->service = $commerce->getProductTypes();
+                        $event->method = 'getProductTypeBy';
+                    }
                     break;
             }
         });
