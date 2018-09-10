@@ -37,7 +37,7 @@
     "require": {
         "php": "^7.0",
         "craftcms/commerce": "^2.0@beta",
-        "nerds-and-company/schematic": "dev-map_source_event as 4.0.16",
+        "nerds-and-company/schematic": "dev-map_source_event as 4.0.16"
     },
     "require-dev": {
         "craftcms/cms": "3.0.12",
