@@ -44,7 +44,7 @@ class SchematicCommerce extends Plugin
         $schematic = Craft::$app->getPlugins()->getPlugin('schematic');
         $commerce = Craft::$app->getPlugins()->getPlugin('commerce');
 
-        if ($schematic && $commerce) {
+        if ($schematic) {
             // Register extra data types
             $config = [
                 'components' => $schematic->components,
