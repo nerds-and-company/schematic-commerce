@@ -89,6 +89,14 @@ class SchematicCommerce extends Plugin
                     if ($commerce) {
                         $event->service = $commerce->getProductTypes();
                         $event->method = 'getProductTypeBy';
+
+                        // Reset cache
+                        $refObject = new \ReflectionObject($event->service);
+                        if ($refObject->hasProperty('_fetchedAllProductTypes')) {
+                            $refProperty = $refObject->getProperty('_fetchedAllProductTypes');
+                            $refProperty->setAccessible(true);
+                            $refProperty->setValue($event->service, false);
+                        }
                     }
                     break;
             }
