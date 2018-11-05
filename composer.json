@@ -37,7 +37,7 @@
     "require": {
         "php": "^7.0",
         "craftcms/commerce": "^2.0@beta",
-        "nerds-and-company/schematic": "dev-record_index_improvements as 4.1.0",
+        "nerds-and-company/schematic": "dev-record_index_improvements as 4.1.0"
     },
     "require-dev": {
         "craftcms/cms": "3.0.12",
