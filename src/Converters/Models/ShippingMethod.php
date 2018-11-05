@@ -6,6 +6,7 @@ use Craft;
 use craft\base\Model;
 use craft\commerce\models\ShippingMethod as ShippingMethodModel;
 use craft\commerce\models\ShippingRule as ShippingRuleModel;
+use craft\commerce\models\ShippingRuleCategory as ShippingRuleCategoryModel;
 use NerdsAndCompany\Schematic\Converters\Models\Base;
 
 /**
@@ -47,6 +48,12 @@ class ShippingMethod extends Base
                 $handle = $shippingRuleCategory->getCategory()->handle;
                 $definition['categories'][$handle] = $this->getRecordDefinition($shippingRuleCategory);
             }
+        }
+
+        if ($record instanceof ShippingRuleCategoryModel) {
+            unset($definition['attributes']['shippingRuleId']);
+            unset($definition['attributes']['shippingCategoryId']);
+            $definition['shippingCategory'] = $record->getCategory() ? $record->getCategory()->name : null;
         }
 
         return $definition;
