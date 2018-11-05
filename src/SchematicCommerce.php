@@ -56,8 +56,8 @@ class SchematicCommerce extends Plugin
                     'paymentCurrencies' => PaymentCurrenciesDataType::class,
                     'productTypes' => ProductTypesDataType::class,
                     'shippingCategories' => ShippingCategoriesDataType::class,
-                    'shippingMethods' => ShippingMethodsDataType::class,
                     'shippingZones' => ShippingAddressZonesDataType::class,
+                    'shippingMethods' => ShippingMethodsDataType::class,
                     'states' => StatesDataType::class,
                     'taxCategories' => TaxCategoriesDataType::class,
                     'taxRates' => TaxRatesDataType::class,
@@ -89,14 +89,6 @@ class SchematicCommerce extends Plugin
                     if ($commerce) {
                         $event->service = $commerce->getProductTypes();
                         $event->method = 'getProductTypeBy';
-
-                        // Reset cache
-                        $refObject = new \ReflectionObject($event->service);
-                        if ($refObject->hasProperty('_fetchedAllProductTypes')) {
-                            $refProperty = $refObject->getProperty('_fetchedAllProductTypes');
-                            $refProperty->setAccessible(true);
-                            $refProperty->setValue($event->service, false);
-                        }
                     }
                     break;
             }

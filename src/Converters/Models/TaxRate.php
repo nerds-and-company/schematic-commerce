@@ -58,8 +58,8 @@ class TaxRate extends Base
     /**
      * {@inheritdoc}
      */
-    public function getRecordIndex(): string
+    public function getRecordIndex(Model $record): string
     {
-        return 'name';
+        return $record->name;
     }
 }

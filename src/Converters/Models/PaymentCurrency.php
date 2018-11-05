@@ -57,8 +57,8 @@ class PaymentCurrency extends Base
     /**
      * {@inheritdoc}
      */
-    public function getRecordIndex(): string
+    public function getRecordIndex(Model $record): string
     {
-        return 'iso';
+        return $record->iso;
     }
 }

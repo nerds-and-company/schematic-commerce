@@ -55,8 +55,8 @@ class State extends Base
     /**
      * {@inheritdoc}
      */
-    public function getRecordIndex(): string
+    public function getRecordIndex(Model $record): string
     {
-        return 'abbreviation';
+        return $record->abbreviation;
     }
 }

@@ -35,4 +35,20 @@ class ShippingAddressZonesDataType extends Base
 
         return $commerce->getShippingZones()->getAllShippingZones();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function afterImport()
+    {
+        $commerce = Craft::$app->getPlugins()->getPlugin('commerce');
+
+        $obj = $commerce->getShippingZones();
+        $refObject = new \ReflectionObject($obj);
+        if ($refObject->hasProperty('_fetchedAllShippingZones')) {
+            $refProperty1 = $refObject->getProperty('_fetchedAllShippingZones');
+            $refProperty1->setAccessible(true);
+            $refProperty1->setValue($obj, false);
+        }
+    }
 }
