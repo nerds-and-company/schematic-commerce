@@ -7,6 +7,7 @@ use craft\base\Model;
 use craft\commerce\models\Country as CountryModel;
 use craft\commerce\models\State as StateModel;
 use craft\commerce\models\ShippingAddressZone as ShippingAddressZoneModel;
+use NerdsAndCompany\Schematic\Schematic;
 use NerdsAndCompany\Schematic\Converters\Models\Base;
 
 /**
