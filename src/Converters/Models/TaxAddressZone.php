@@ -24,6 +24,16 @@ use NerdsAndCompany\Schematic\Converters\Models\Base;
 class TaxAddressZone extends Base
 {
     /**
+     * @var Country[]
+     */
+    private $countries;
+
+    /**
+     * @var State[]
+     */
+    private $states;
+
+    /**
      * {@inheritdoc}
      */
     public function getRecordDefinition(Model $record): array

@@ -35,4 +35,20 @@ class TaxAddressZonesDataType extends Base
 
         return $commerce->getTaxZones()->getAllTaxZones();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function afterImport()
+    {
+        $commerce = Craft::$app->getPlugins()->getPlugin('commerce');
+
+        $obj = $commerce->getTaxZones();
+        $refObject = new \ReflectionObject($obj);
+        if ($refObject->hasProperty('_fetchedAllTaxZones')) {
+            $refProperty1 = $refObject->getProperty('_fetchedAllTaxZones');
+            $refProperty1->setAccessible(true);
+            $refProperty1->setValue($obj, false);
+        }
+    }
 }

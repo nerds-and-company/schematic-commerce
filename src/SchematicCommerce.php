@@ -60,8 +60,8 @@ class SchematicCommerce extends Plugin
                     'shippingMethods' => ShippingMethodsDataType::class,
                     'states' => StatesDataType::class,
                     'taxCategories' => TaxCategoriesDataType::class,
-                    'taxRates' => TaxRatesDataType::class,
                     'taxZones' => TaxAddressZonesDataType::class,
+                    'taxRates' => TaxRatesDataType::class,
                 ]),
             ];
             Craft::configure($schematic, $config);

@@ -20,6 +20,11 @@ use NerdsAndCompany\Schematic\Converters\Models\Base;
 class TaxRate extends Base
 {
     /**
+     * @var int[]
+     */
+    private $taxZones;
+
+    /**
      * {@inheritdoc}
      */
     public function getRecordDefinition(Model $record): array
@@ -42,6 +47,14 @@ class TaxRate extends Base
     {
         $commerce = Craft::$app->getPlugins()->getPlugin('commerce');
 
+        if ($definition['taxCategory']) {
+            $record->taxCategoryId = $this->getTaxCategoryIdByHandle($commerce, $definition['taxCategory']);
+        }
+
+        if ($definition['taxZone']) {
+            $record->taxZoneId = $this->getTaxZoneIdByName($commerce, $definition['taxZone']);
+        }
+
         return $commerce->getTaxRates()->saveTaxRate($record);
     }
 
@@ -61,5 +74,38 @@ class TaxRate extends Base
     public function getRecordIndex(Model $record): string
     {
         return $record->name;
+    }
+
+    /**
+     * Get tax category id by handle.
+     *
+     * @param $commerce
+     * @param string $handle
+     *
+     * @return int|null
+     */
+    protected function getTaxCategoryIdByHandle($commerce, $handle)
+    {
+        return $commerce->getTaxCategories()->getTaxCategoryByHandle($handle)->id;
+    }
+
+    /**
+     * Get tax zone id by name.
+     *
+     * @param $commerce
+     * @param string $name
+     *
+     * @return int|null
+     */
+    protected function getTaxZoneIdByName($commerce, $name)
+    {
+        if (!isset($this->taxZones)) {
+            $this->taxZones = [];
+            foreach ($commerce->getTaxZones()->getAllTaxZones() as $taxZone) {
+                $this->taxZones[$taxZone->name] = $taxZone->id;
+            }
+        }
+
+        return $this->taxZones[$name];
     }
 }

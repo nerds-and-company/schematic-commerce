@@ -85,7 +85,6 @@ class ShippingRule extends Base
         return $record->name;
     }
 
-
     /**
      * Get shipping zone id by name.
      *
