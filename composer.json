@@ -28,16 +28,10 @@
         "changelogUrl": "https://github.com/nerds-and-company/schematic-commerce/blob/master/CHANGELOG.md",
         "downloadUrl": "https://github.com/nerds-and-company/schematic-commerce/releases/latest"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/boboldehampsink/schematic"
-        }
-    ],
     "require": {
         "php": "^7.0",
         "craftcms/commerce": "^2.0@beta",
-        "nerds-and-company/schematic": "dev-record_index_improvements as 4.1.0"
+        "nerds-and-company/schematic": "4.1.*"
     },
     "require-dev": {
         "craftcms/cms": "3.0.12",
